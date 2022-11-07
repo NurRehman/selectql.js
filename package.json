@@ -1,0 +1,41 @@
+{
+  "name": "sql-slect.js",
+  "version": "1.0.0",
+  "description": "Sql-Select.js is inspired by SQL like syntax for accessing and manipulating Objects.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.json",
+    "_watch": "NODE_DEBUG_PORT=9230 PORT=3000 nodemon --config nodemon.json",
+    "watch": "nodemon --config nodemon.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NurRehman/sql-select.js"
+  },
+  "keywords": [
+    "js",
+    "typescript",
+    "sql",
+    "select",
+    "object",
+    "array",
+    "sql-select"
+  ],
+  "author": "Nadeem Ur-Rehman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NurRehman/sql-select.js/issues"
+  },
+  "homepage": "https://github.com/NurRehman/sql-select.js#readme",
+  "devDependencies": {
+    "@types/node": "^15.12.4",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.3.4"
+  },
+  "dependencies": {
+
+  }
+}
