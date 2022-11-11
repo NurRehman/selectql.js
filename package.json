@@ -1,6 +1,6 @@
 {
   "name": "selectql.js",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "SelectQL.js is inspired by SQL like syntax for accessing and manipulating Objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,8 @@
     "prepublish": "tsc --project tsconfig.json",
     "build": "tsc --project tsconfig.json",
     "_watch": "NODE_DEBUG_PORT=9230 PORT=3000 nodemon --config nodemon.json",
-    "watch": "nodemon --config nodemon.json"
+    "watch": "nodemon --config nodemon.json",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,8 @@
   "devDependencies": {
     "@types/node": "^15.12.4",
     "nodemon": "^2.0.7",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "semantic-release": "^19.0.5"
   },
   "dependencies": {}
 }
