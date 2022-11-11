@@ -1,3 +1,3 @@
-export { SqlSelect } from './SqlSelect';
+export { SelectQL } from './SelectQL';
 export { SelectStatement, ISelector } from "./Selector";
 

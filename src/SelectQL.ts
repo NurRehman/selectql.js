@@ -2,7 +2,7 @@
 import { SelectStatement, ISelector, Selector, ISelectBuilder } from './Selector'
 import * as util from './utils'
 
-class SqlSelect implements ISelectBuilder {
+export class SelectQL implements ISelectBuilder {
     // The Concrete Builder
     selector: Selector;
     selectInput: any;
