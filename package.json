@@ -1,6 +1,6 @@
 {
-  "name": "SelectQL.js",
-  "version": "1.0.0",
+  "name": "selectql.js",
+  "version": "0.0.0-development",
   "description": "SelectQL.js is inspired by SQL like syntax for accessing and manipulating Objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,21 +9,10 @@
     "prepublish": "tsc --project tsconfig.json",
     "build": "tsc --project tsconfig.json",
     "_watch": "NODE_DEBUG_PORT=9230 PORT=3000 nodemon --config nodemon.json",
-    "watch": "nodemon --config nodemon.json"
+    "watch": "nodemon --config nodemon.json",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NurRehman/selectql.js"
-  },
-  "keywords": [
-    "js",
-    "typescript",
-    "sql",
-    "select",
-    "object",
-    "array",
-    "selectQL"
-  ],
   "author": "Nadeem Ur-Rehman",
   "license": "MIT",
   "bugs": {
@@ -32,10 +21,15 @@
   "homepage": "https://github.com/NurRehman/selectql.js/#readme",
   "devDependencies": {
     "@types/node": "^15.12.4",
+    "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.7",
+    "semantic-release": "^19.0.5",
     "typescript": "^4.3.4"
   },
-  "dependencies": {
-
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
