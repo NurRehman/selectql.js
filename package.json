@@ -5,11 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "tsc --project tsconfig.json",
     "build": "tsc --project tsconfig.json",
-    "_watch": "NODE_DEBUG_PORT=9230 PORT=3000 nodemon --config nodemon.json",
-    "watch": "nodemon --config nodemon.json",
     "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
