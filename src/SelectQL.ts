@@ -29,14 +29,14 @@ export class SelectQL implements ISelector {
      * @param expressionValue  string or any value
      * @returns extracted array like object
      */
-    where(expressionKey: any, expressionOperator: Operators, expressionValue: any) : this {
+    where(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
         let returned = this.data;
 
         // checks if any of the where clause is key/operator or value is empty
         if (util.isEmpty(expressionKey) || util.isEmpty(expressionOperator) || util.isEmpty(expressionValue)) {
-            throw new Error ('WHERE expression not provided correctly!');
+            throw new Error('WHERE expression not provided correctly!');
         }
-        
+
         if (expressionOperator == Operators.EQUAL) {
             // Returned only one item where condition met
             returned = this.data.splice(this.data.findIndex((o) => {
@@ -64,11 +64,11 @@ export class SelectQL implements ISelector {
         }
     }
 
-     /**
-     * Creates a new array concatenating array with any additional arrays and/or values.
-     * @param concatWith array or value
-     * @returns this
-     */
+    /**
+    * Creates a new array concatenating array with any additional arrays and/or values.
+    * @param concatWith array or value
+    * @returns this
+    */
 
     join(concatWith: any): this {
         this.data = !util.isEmpty(concatWith) ? this.data.concat(concatWith) : this;
@@ -83,15 +83,16 @@ export class SelectQL implements ISelector {
      * @returns extracted array like object
      */
     and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
-        this.data = this.where(expressionKey, expressionOperator, expressionValue);
+        let returnedAnd = this.where(expressionKey, expressionOperator, expressionValue);
+        this.data = returnedAnd;
         return this;
     }
 
-   /**
-     * Creates an array of unique values, taking an iteratee to compute uniqueness with the provided key
-     * @param key string
-     * @returns 
-     */
+    /**
+      * Creates an array of unique values, taking an iteratee to compute uniqueness with the provided key
+      * @param key string
+      * @returns 
+      */
     uniqueByKey(key: string): this {
         let uniquArr: any = [];
         this.data.forEach((value, index) => {
@@ -108,9 +109,11 @@ export class SelectQL implements ISelector {
      * @param input 
      * @returns client's provided input.
      */
-    orElse(input: any): this {
-       this.data = input;
-       return this;
+    ifEmptyThen(input: any): this {
+        if (!this.data || util.isEmpty(this.data) || !this.data.length) {
+            this.data = input
+        }
+        return this;
     }
 
     /**
