@@ -4,7 +4,7 @@ export interface ISelector {
         join(concatWith: any): this
         and(key: any, operator: Operators, value: any): this
         uniqueByKey(key: string): this
-        build(): Select
+        build(): this
 }
 
 export enum Operators {

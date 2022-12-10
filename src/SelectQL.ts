@@ -117,8 +117,9 @@ export class SelectQL implements ISelector {
      * builder function 
      * @returns final object.
      */
-    build(): Select {
-        return new Select(this);
+    build(): this {
+        let selectedData: any = new Select(this);
+        return selectedData.data;
     }
 
 }
