@@ -2,7 +2,7 @@
 import Selector, { ISelector, Operators } from './Selector'
 import * as util from './utils'
 
-export default class SelectQL implements ISelector {
+export class SelectQL implements ISelector {
     // The Concrete Builder
     selector: Selector;
     selectedInput: any;
