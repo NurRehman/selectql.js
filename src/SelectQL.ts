@@ -1,21 +1,20 @@
 
-import { SelectStatement, ISelector, Selector, ISelectBuilder, Operators, whereClauseArray } from './Selector'
+import Selector, { ISelector, Operators } from './Selector'
 import * as util from './utils'
 
-export class SelectQL implements ISelectBuilder {
+export default class SelectQL implements ISelector {
     // The Concrete Builder
     selector: Selector;
-    selectInput: any;
-    selectType: any;
+    selectedInput: any;
     isArray: boolean = false;
-    isObject: boolean = false;
+    data: any = [];
     constructor(selectorInput: any) {
 
         if (util.checkArray(selectorInput) || util.checkObject(selectorInput)) {
             this.selector = new Selector();
+            this.data = selectorInput;
             if (util.checkArray(selectorInput)) {
                 this.isArray = true;
-                // this.selectType = new ArraySelector(selectorInput);
             }
         } else {
             throw new Error('Provide array or object as an input to select');
@@ -30,8 +29,8 @@ export class SelectQL implements ISelectBuilder {
      * @param expressionValue  string or any value
      * @returns extracted array like object
      */
-    where(expressionKey: any, expressionOperator: Operators, expressionValue: any) {
-        let returned = this.selectType;
+    where(expressionKey: any, expressionOperator: Operators, expressionValue: any) : this {
+        let returned = this.selectedInput;
 
         // checks if any of the where clause is key/operator or value is empty
         if (util.isEmpty(expressionKey) || util.isEmpty(expressionOperator) || util.isEmpty(expressionValue)) {
@@ -40,25 +39,26 @@ export class SelectQL implements ISelectBuilder {
         
         if (expressionOperator == Operators.EQUAL) {
             // Returned only one item where condition met
-            returned = this.selectType.splice(this.selectType.findIndex((o) => {
+            returned = this.selectedInput.splice(this.selectedInput.findIndex((o) => {
                 return o[expressionKey] == expressionValue;
             }), 1);
         } else if (expressionOperator == Operators.NOT_EQUAL) {
             // Remove all element except the key mentioned
-            returned = this.selectType.filter(o => o[expressionKey] !== expressionValue);
+            returned = this.selectedInput.filter(o => o[expressionKey] !== expressionValue);
         } else if (expressionOperator == Operators.GREATER_THAN) {
-            returned = this.selectType.filter(o => o[expressionKey] > expressionValue);
+            returned = this.selectedInput.filter(o => o[expressionKey] > expressionValue);
         } else if (expressionOperator == Operators.GREATER_EQUAL) {
-            returned = this.selectType.filter(o => o[expressionKey] >= expressionValue);
+            returned = this.selectedInput.filter(o => o[expressionKey] >= expressionValue);
         } else if (expressionOperator == Operators.LESS_THEN) {
-            returned = this.selectType.filter(o => o[expressionKey] < expressionValue);
+            returned = this.selectedInput.filter(o => o[expressionKey] < expressionValue);
         } else if (expressionOperator == Operators.LESS_THEN_EQUAL) {
-            returned = this.selectType.filter(o => o[expressionKey] <= expressionValue);
+            returned = this.selectedInput.filter(o => o[expressionKey] <= expressionValue);
         }
 
         if (returned) {
+            this.data = returned;
             // console.log(returned, 'retu');
-            return returned
+            return this.data;
         } else {
             throw new Error('No correct WHERE expression found!');
         }
@@ -71,7 +71,7 @@ export class SelectQL implements ISelectBuilder {
      */
 
     join(concatWith: any): this {
-        return !util.isEmpty(concatWith) ? this.selectType.concat(concatWith) : this;
+        return this.data = !util.isEmpty(concatWith) ? this.selectedInput.concat(concatWith) : this;
     }
 
     /**
@@ -81,8 +81,8 @@ export class SelectQL implements ISelectBuilder {
      * @param expressionValue  string or any value
      * @returns extracted array like object
      */
-    and(expressionKey: any, expressionOperator: Operators, expressionValue: any) {
-        return this.where(expressionKey, expressionOperator, expressionValue);
+    and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
+        return this.data = this.where(expressionKey, expressionOperator, expressionValue);
     }
 
    /**
@@ -92,13 +92,13 @@ export class SelectQL implements ISelectBuilder {
      */
     uniqueByKey(key: string): this {
         let uniquArr: any = [];
-        this.selectType.forEach((value, index) => {
+        this.selectedInput.forEach((value, index) => {
             if (uniquArr.indexOf(value[key]) === -1) {
                 uniquArr.push(value);
 
             }
         });
-        return uniquArr;
+        return this.data = uniquArr;
     }
 
     /**
@@ -107,9 +107,7 @@ export class SelectQL implements ISelectBuilder {
      * @returns client's provided input.
      */
     orElse(input: any) {
-        if (!util.isEmpty(input)) {
-            return input;
-        }
+       return this.data = input;
     }
 
     /**
