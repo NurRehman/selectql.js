@@ -30,11 +30,40 @@ export class SelectQL implements ISelector {
      * @returns extracted array like object
      */
     where(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
+        let filtered = this._filteredBody(expressionKey, expressionOperator, expressionValue);
+        if (filtered) {
+            this.data = filtered;
+            // console.log(returned, 'retu');
+            return this;
+        } else {
+            throw new Error('WHERE expression not correctly passed!');
+        }
+    }
+
+    /**
+     * another predicate which eventually calls where
+     * @param expressionKey string or any key
+     * @param expressionOperator Operator type operator
+     * @param expressionValue  string or any value
+     * @returns extracted array like object
+     */
+     and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
+        let filtered = this._filteredBody(expressionKey, expressionOperator, expressionValue);
+        if (filtered) {
+            this.data = filtered;
+            // console.log(returned, 'retu');
+            return this;
+        } else {
+            throw new Error('AND expression not correctly passed!');
+        }
+    }
+
+    _filteredBody(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
         let returned = this.data;
 
-        // checks if any of the where clause is key/operator or value is empty
+        // checks if any of the where/and clause is key/operator or value is empty
         if (util.isEmpty(expressionKey) || util.isEmpty(expressionOperator) || util.isEmpty(expressionValue)) {
-            throw new Error('WHERE expression not provided correctly!');
+            throw new Error('Expression mandatory syntax missing!');
         }
 
         if (expressionOperator == Operators.EQUAL) {
@@ -55,13 +84,7 @@ export class SelectQL implements ISelector {
             returned = this.data.filter(o => o[expressionKey] <= expressionValue);
         }
 
-        if (returned) {
-            this.data = returned;
-            // console.log(returned, 'retu');
-            return this;
-        } else {
-            throw new Error('No correct WHERE expression found!');
-        }
+        return returned;
     }
 
     /**
@@ -75,18 +98,7 @@ export class SelectQL implements ISelector {
         return this;
     }
 
-    /**
-     * another predicate which eventually calls where
-     * @param expressionKey string or any key
-     * @param expressionOperator Operator type operator
-     * @param expressionValue  string or any value
-     * @returns extracted array like object
-     */
-    and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
-        let returnedAnd = this.where(expressionKey, expressionOperator, expressionValue);
-        this.data = returnedAnd;
-        return this;
-    }
+    
 
     /**
       * Creates an array of unique values, taking an iteratee to compute uniqueness with the provided key
