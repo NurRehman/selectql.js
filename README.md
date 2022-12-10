@@ -28,14 +28,24 @@ First include the library by `node` provided `require` keyword like:
 
 **Enum** should be followed in order to properly chain the functions.
 
-enum Operators {
-        EQUAL = '==',
-        NOT_EQUAL = '!=',
-        GREATER_THAN = '>',
-        GREATER_EQUAL = '>=',
-        LESS_THEN = '<',
-        LESS_THEN_EQUAL = '<=',
-}
+|  Operator| Value  |
+|--|--|
+|  EQUAL| == |
+|  NOT_EQUAL| != |
+|  GREATER_THAN| > |
+|  GREATER_EQUAL| >= |
+|  LESS_THEN| < |
+|  LESS_THEN_EQUAL| <= |
+
+
+    enum Operators {
+            EQUAL = '==',
+            NOT_EQUAL = '!=',
+            GREATER_THAN = '>',
+            GREATER_EQUAL = '>=',
+            LESS_THEN = '<',
+            LESS_THEN_EQUAL = '<=',
+    }
 
 > Initialize the library by providing the objects of array and chain through the provided APIs
 
