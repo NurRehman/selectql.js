@@ -7,6 +7,9 @@ export interface ISelector {
         build(): this
 }
 
+/**
+ * Publically available Operator Enumeration
+ */
 export enum Operators {
         EQUAL = '==',
         NOT_EQUAL = '!=',
