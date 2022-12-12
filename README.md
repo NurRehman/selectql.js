@@ -1,6 +1,9 @@
 
 # SelectQL.js
 
+![Made with love in Canada](https://madewithlove.now.sh/ca?heart=true)
+[![npm version](https://badge.fury.io/js/selectql.js.svg)](https://badge.fury.io/js/selectql.js)
+![example workflow](https://github.com/Nurrehman/selectql.js/actions/workflows/publish.yml/badge.svg)
 SelectQL.js is inspired by Structured Query Language (SQL) for accessing and manipulating Objects in an easy and familiar way. It supports complex **Objects** and **Arrays** using Builder Design Pattern.
 
 ## Install
@@ -66,8 +69,16 @@ First include the library by `node` provided `require` keyword like:
 
 ## Client Chainable APIs:
 
- - **where(*key: any, operator: Operators, value: any*)**: Like a map to iterate and pick an item by key and conditionally change array like object `.where('name', Operators.NOT_EQUAL, 'New York')`
- - **and(*key: any, operator: Operators, value: any*)**: where like function a predicate which will behave like where method. ` .and('population', Operators.LESS_THEN, '5526006')`
+ - **where(*key: any, operator: Operators, value: any*)**: As per SQL definition The WHERE clause is used to filter records. It is used to extract only those records that fulfill a specified condition. (this can be used multiple time)
+  `.where('name', Operators.NOT_EQUAL, 'New York')`
+ - **and(*key: any, operator: Operators, value: any*)**: where like function a predicate which will eventually use WHERE method (this can be used multiple time). ` .and('population', Operators.LESS_THEN, '5526006')`
  - **join(*concatWith: any*)**: Client can provide object like array to concat with the originally provided array. `.join(denver)`
  - **ifEmptyThen(*input: any*)**: if no condition met or null then client can return it's own input/object `.ifEmptyThen(denver)`
  - **build()**: builder function which is a must in order to return properly filtered array. `.build()`
+
+
+ ## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Free Library!**
