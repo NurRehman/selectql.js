@@ -1,9 +1,10 @@
 
 # SelectQL.js
 
+![SelectQL workflow](https://github.com/Nurrehman/selectql.js/actions/workflows/publish.yml/badge.svg)
 ![Made with love in Canada](https://madewithlove.now.sh/ca?heart=true)
 [![npm version](https://badge.fury.io/js/selectql.js.svg)](https://badge.fury.io/js/selectql.js)
-![example workflow](https://github.com/Nurrehman/selectql.js/actions/workflows/publish.yml/badge.svg)
+
 SelectQL.js is inspired by Structured Query Language (SQL) for accessing and manipulating Objects in an easy and familiar way. It supports complex **Objects** and **Arrays** using Builder Design Pattern.
 
 ## Install
