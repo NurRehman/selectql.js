@@ -23,7 +23,8 @@ export class SelectQL implements ISelector {
 
 
     /**
-     * Like a map to iterate and pick an item by key and conditionally change array like object
+     *  As per SQL definition The WHERE clause is used to filter records. 
+     *  It is used to extract only those records that fulfill a specified condition.
      * @param expressionKey string or any key
      * @param expressionOperator Operator type operator
      * @param expressionValue  string or any value
@@ -41,13 +42,13 @@ export class SelectQL implements ISelector {
     }
 
     /**
-     * another predicate which eventually calls where
+     * where like function a predicate which will eventually use WHERE method
      * @param expressionKey string or any key
      * @param expressionOperator Operator type operator
      * @param expressionValue  string or any value
      * @returns extracted array like object
      */
-     and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
+    and(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
         let filtered = this._filteredBody(expressionKey, expressionOperator, expressionValue);
         if (filtered) {
             this.data = filtered;
@@ -58,7 +59,14 @@ export class SelectQL implements ISelector {
         }
     }
 
-    _filteredBody(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
+    /**
+     * private member to be used in WHERE and AND methods
+     * @param expressionKey 
+     * @param expressionOperator 
+     * @param expressionValue 
+     * @returns filtered object of array
+     */
+    private _filteredBody(expressionKey: any, expressionOperator: Operators, expressionValue: any): this {
         let returned = this.data;
 
         // checks if any of the where/and clause is key/operator or value is empty
@@ -98,7 +106,7 @@ export class SelectQL implements ISelector {
         return this;
     }
 
-    
+
 
     /**
       * Creates an array of unique values, taking an iteratee to compute uniqueness with the provided key
